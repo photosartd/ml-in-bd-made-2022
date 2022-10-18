@@ -1,0 +1,17 @@
+-mkdir, -touchz
+1. hdfs dfs -mkdir /myfolder1
+2. hdfs dfs -mkdir /myfolder1/myfolder2
+3. Trash - это директория /user/username/.Trash, в которую отправляются все удаленные с помощью -rm fфайлы, если отдельно с помощью флага -skipTrash не указать, что нужно удалить их безвозвратно.
+4. hdfs dfs -touchz /myfolder1/myfolder2/file.txt
+5. hdfs dfs -rm -skipTrash /myfolder1/myfolder2/file.txt
+6. hdfs dfs -rm -R -skipTrash /myfolder1
+-put, -cat, -tail, -cp
+1. hdfs dfs -put /opt/hadoop-3.2.1/README.txt /myfolder
+2. hdfs dfs -cat /myfolder/README.txt
+3. hdfs dfs -tail /myfolder/README.txt
+4. hdfs dfs -head /myfolder/README.txt
+5. hdfs dfs -cp /myfolder/README.txt /
+Replication factor block:
+1. hdfs dfs -setrep -w 2 /myfolder/README.txt. В моем случае увеличение числа реплик заняло больше времени, хотя warning по времени выскочил только при уменьшении.
+2. hdfs fsck /myfolder/README.txt -files -blocks -locations
+3. hdfs fsck -blockId <blockid>
