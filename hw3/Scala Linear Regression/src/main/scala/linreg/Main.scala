@@ -11,7 +11,8 @@ object Main extends App {
     mean(abs(y_true - y_pred))
   }
 
-  val matrix = csvread(new File("/Users/dmitry.trofimov/Documents/MADE/winequality_red.csv"),',')
+  val pathname = "src/main/files/winequality_red.csv"
+  val matrix = csvread(new File(pathname),',')
   //x, y
   val y: DenseVector[Double] = matrix(::, -1)
   val x: DenseMatrix[Double] = matrix(::, 0 to -2)
@@ -20,9 +21,9 @@ object Main extends App {
   model.fit(x, y)
   val prediction = model.predict(x)
   println(prediction)
-
-
   val maERR = mae(y, prediction)
   println(s"MAE: ${maERR}")
+  val path_to_save = "src/main/files/predictions.csv"
+  csvwrite(new File(path_to_save), prediction.toDenseMatrix, ',')
 
 }
